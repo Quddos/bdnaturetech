@@ -1,19 +1,45 @@
-on: push
-name: Publish Websites
+name: 🚀 Deploy website on push
+on: 
+  push:
+    branches:
+      - main
 jobs:
-FTP-Deploy-Action:
-name: FTP-Deploy-Action
-runs-on: ubuntu-latest
-steps:
-- uses: actions/checkout@v2.1.0
-with:
-fetch-depth: 2
-- name: FTP-Deploy-Action
-uses: SamKirkland/FTP-Deploy-Action@3.1.1
-with:
-ftp-server: ftp://ftp.bdnaturetech.com:21/public_html
-ftp-username: a5e5glvhtr3e
-ftp-password: ${{ secrets.FTP_PASSWORD }}
+  FTP-Deploy-Action:
+    name: FTP-Deploy-Action
+    runs-on: ubuntu-latest
+    steps:
+    - name: Get latest codes
+      uses: actions/checkout@v2
+    
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@4.3.2
+      with:
+        server: ftp://ftp.bdnaturetech.com:21/public_html
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+
+
+
+
+
+
+
+# on: push
+# name: Publish Websites
+# jobs:
+# FTP-Deploy-Action:
+# name: FTP-Deploy-Action
+# runs-on: ubuntu-latest
+# steps:
+# - uses: actions/checkout@v2.1.0
+# with:
+# fetch-depth: 2
+# - name: FTP-Deploy-Action
+# uses: SamKirkland/FTP-Deploy-Action@3.1.1
+# with:
+# ftp-server: ftp://ftp.bdnaturetech.com:21/public_html
+# ftp-username: a5e5glvhtr3e
+# ftp-password: ${{ secrets.FTP_PASSWORD }}
 
 
 
